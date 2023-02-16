@@ -40,7 +40,8 @@ public class StudentManager {
 					searchName = sc.nextLine();
 					
 					for(int i = 0; i<studentArray.size(); i++) {
-						if(studentArray.get(i).studentName.equals(searchName)) {
+						
+						if(searchName.equals(studentArray.get(i).getStudentName())) {
 							System.out.println("이름: " + studentArray.get(i).getStudentName());
 							System.out.println("전화번호: " + studentArray.get(i).getPhoneNum());
 							System.out.println("수강과목: " + studentArray.get(i).getSubjectName());
@@ -48,25 +49,25 @@ public class StudentManager {
 							searchOk = true;
 							
 							
-							break;
 						} 
-						System.out.println("추가 검색 하시겠습니까? (Y/N)");
-						String input = (sc.nextLine()).toUpperCase();
-						if(input.equals("Y")) {
-							flag = true;
-						}
-						if (input.equals("N")) {
-							break;
-						}
+						
 //						if(!(studentArray.get(i).studentName.equals(searchName))) {
 //							System.out.println("등록되지 않은 학생입니다.");
 //							break;
 //						}
 					}
-					
 					if (!searchOk) {
 						System.out.println("등록되지 않은 학생입니다.\n다시 입력해주세요.");
 					}
+					System.out.println("추가 검색 하시겠습니까? (Y/N)");
+					String input = (sc.nextLine()).toUpperCase();
+					if(input.equals("Y")) {
+						flag = true;
+					}
+					if (input.equals("N")) {
+						break;
+					}
+					
 					
 					break;
 				case 2: //학생 등록
