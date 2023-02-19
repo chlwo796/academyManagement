@@ -24,14 +24,15 @@ public class StudentManager {
 		
 		
 		
-		System.out.println("------------------------------------------------------");
-		System.out.println("1.학생검색 2.학생등록 3.학생 정보수정 4.학생삭제 5.이전화면으로");
-		System.out.println("------------------------------------------------------");
-		System.out.print("메뉴 선택 > ");
-		menuSelect = sc.nextInt();
-		sc.nextLine();
+		
 		
 		while(flag) {
+			System.out.println("------------------------------------------------------");
+			System.out.println("1.학생검색 2.학생등록 3.학생 정보수정 4.학생삭제 5.이전화면으로");
+			System.out.println("------------------------------------------------------");
+			System.out.print("메뉴 선택 > ");
+			menuSelect = sc.nextInt();
+			sc.nextLine();
 			
 			switch(menuSelect) {
 				case 1: //학생 검색
@@ -47,8 +48,7 @@ public class StudentManager {
 							System.out.println("수강과목: " + studentArray.get(i).getSubjectName());
 							System.out.println("반: " + studentArray.get(i).getClassName());
 							searchOk = true;
-							
-							
+			
 						} 
 						
 //						if(!(studentArray.get(i).studentName.equals(searchName))) {
