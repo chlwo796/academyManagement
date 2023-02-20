@@ -20,7 +20,9 @@ public class StudentManager {
 	int menuSelect = 0;
 	boolean flag = true;
 	String searchName;
-
+	
+	
+	//전체 관리 메뉴 실행 메소드
 	void studentRun() {
 
 		while (flag) {
@@ -60,7 +62,7 @@ public class StudentManager {
 					break;
 				}
 				default: {
-					System.out.println("잘못입력하셨습니다.");
+					System.out.println("잘못 입력하셨습니다.");
 					continue;
 				}
 			}
@@ -68,7 +70,7 @@ public class StudentManager {
 	} // studentRun end
 	
 	
-
+	//학생관리 메뉴의 메소드
 	void studentManage() {
 		Boolean flag = true;
 		
@@ -82,15 +84,18 @@ public class StudentManager {
 			sc.nextLine();
 
 			boolean run = true;
+			String input; //추가검색용 변수
+			boolean isThere; //등록되지 않은 항목 검사용?
 
 			while (run) {
 
 				switch (menuSelect) {
 				case 1: // 학생 검색
-					boolean searchOk = false;
+					isThere = false;
 					System.out.print("학생 이름을 입력해주세요. > ");
 					searchName = sc.nextLine();
-
+					
+					//searchName이 리스트에 있다면 정보 출력
 					for (int i = 0; i < studentList.size(); i++) {
 
 						if (searchName.equals(studentList.get(i).getStudentName())) {
@@ -98,21 +103,19 @@ public class StudentManager {
 							System.out.println("전화번호: " + studentList.get(i).getPhoneNum());
 							System.out.println("수강과목: " + studentList.get(i).getSubjectName());
 							System.out.println("반: " + studentList.get(i).getClassName());
-							searchOk = true;
+							isThere = true;
 
 						}
 
-//								if(!(studentArray.get(i).studentName.equals(searchName))) {
-//									System.out.println("등록되지 않은 학생입니다.");
-//									break;
-//								}
 					}
 
-					if (!searchOk) {
+					if (!isThere) {
 						System.out.println("등록되지 않은 학생입니다.\n다시 입력해주세요.");
+						break;
 					}
+					
 					System.out.println("추가 검색 하시겠습니까? (Y/N)");
-					String input = (sc.nextLine()).toUpperCase();
+					input = (sc.nextLine()).toUpperCase();
 					if (input.equals("Y")) {
 						run = true;
 					}
@@ -140,32 +143,87 @@ public class StudentManager {
 					break;
 
 				case 3: // 학생 수정
-					Scanner ms = new Scanner(System.in);
+					
+					Scanner ms = new Scanner(System.in); //변경할 전화번호를 입력받을 스캐너
+					isThere = false;
+					
 					System.out.print("학생 이름을 입력하세요. > ");
 					searchName = sc.nextLine();
+					
+					
+					for(int i = 0; i<studentList.size(); i++) {
+						String privNum;//수정 전 전화번호
+						privNum = studentList.get(i).getPhoneNum(); //기존 전화번호를 저장할 변수 선언
+						
+						if (searchName.equals(studentList.get(i).getStudentName())) {
+							System.out.print("변경할 전화번호를 입력하세요. > ");
+							studentList.get(i).setPhoneNum(ms.nextLine());
+							System.out.println("전화번호가 " + privNum + "에서 " +studentList.get(i).getPhoneNum() + "으로 변경되었습니다.");
+							isThere = true;
+						} 
+						
+					}
+					if(!isThere) {
+						System.out.println("등록되지 않은 학생입니다.\n다시 입력해주세요.");
+						break;
+					}
+					
+					System.out.println("더 수정 하시겠습니까? (Y/N)");
+					input = (sc.nextLine()).toUpperCase();
+					if (input.equals("Y")) {
+						run = true;
+					}
+					if (input.equals("N")) {
+						run = false;
+						break;
+					}
+					break;
 
-					for (Student s : studentList) {
-						if (s.studentName.equals(searchName)) {
-							System.out.print("수정할 전화번호를 입력하세요. > ");
-							s.phoneNum = ms.nextLine();
-
-							if (s.phoneNum.length() <= 13) {
-								System.out.println("정보가 수정되었습니다.");
-							} else {
-								System.out.println("잘못된 입력입니다.");
+				case 4: // 학생 삭제
+					
+					
+					System.out.print("삭제할 학생의 이름을 입력해주세요. > ");
+					String delStudent = sc.nextLine();
+					isThere = false;
+					for (int i = 0; i < studentList.size(); i++) {
+						
+						
+						if(studentList.get(i).studentName.equals(delStudent)) {
+							
+							studentList.remove(i);
+							
+							System.out.println("정말 삭제하시겠습니까? (Y/N)");
+							input = (sc.nextLine()).toUpperCase();
+							
+							if (input.equals("Y")) {
+								System.out.println(delStudent + " 학생의 정보가 삭제되었습니다.");
+								isThere = true;
+								run = false;
+								break;
 							}
-
-						} else {
-							System.out.println("등록되지 않은 학생입니다.");
-						}
-
+							else if (input.equals("N")) {
+								System.out.println("메뉴 선택으로 돌아갑니다.");
+								isThere = true;
+								run = false;
+								break;
+							}
+							
+							break;
+						} 
+						
+						
+					}
+					if (!isThere){
+						System.out.println("등록되지 않은 학생입니다.\n다시 입력해주세요.");
+						break;
 					}
 
 					break;
 
-				case 4: // 학생 삭제
-
 				case 5: // 이전 화면으로
+					System.out.println("이전 화면으로 돌아갑니다.");
+					run = false;
+					break;
 
 				default:
 					System.out.println("잘못된 입력입니다.");

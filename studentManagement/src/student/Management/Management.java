@@ -39,6 +39,7 @@ public class Management {
 		}
 	}
 
+	
 	// 전체 강의 목록
 	void serchAll() {
 

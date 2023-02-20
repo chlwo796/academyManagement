@@ -1,17 +1,17 @@
 package student.Management;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import java.util.Scanner;
 
-=======
->>>>>>> 2a78bee4bf56652698cdf1c1e4dc1a9f67d8ad4c
+//=======
+//>>>>>>> 2a78bee4bf56652698cdf1c1e4dc1a9f67d8ad4c
 public class Score {
 	// 성적 검색, 전체 성적, 반별 성적
 	// 검색 -> 이름
 	// 이름 -> 과목 > 점수
 	// Map -> <Student,value = 점수>
 	private int score;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	Student student;
 	Scanner sc = new Scanner(System.in);
 	String choice;
@@ -66,6 +66,6 @@ public class Score {
 	}
 }
 
-=======
-}
->>>>>>> 2a78bee4bf56652698cdf1c1e4dc1a9f67d8ad4c
+//=======
+
+//>>>>>>> 2a78bee4bf56652698cdf1c1e4dc1a9f67d8ad4c
