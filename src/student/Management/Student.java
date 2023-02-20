@@ -1,7 +1,6 @@
 package student.Management;
 
 public class Student {
-	//학생 관련 필드설정 클래스
 	
 	public String studentName; // 학생 이름
 	public String phoneNum; // 전화번호

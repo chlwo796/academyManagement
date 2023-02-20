@@ -1,11 +1,13 @@
 package student.Management;
 
-public class LectureData {
-	private String lecture;
-	private String teacherName;
-	private int tuition;
+public class Lecture {
+	//강의 관련 필드설정 클래스
+	
+	private String lecture; //강의 이름
+	private String teacherName; //선생님 이름
+	private int tuition; //수업료
 
-	public LectureData(String lecture, String teacherName, int tuition) {
+	public Lecture(String lecture, String teacherName, int tuition) {
 		super();
 		this.lecture = lecture;
 		this.teacherName = teacherName;

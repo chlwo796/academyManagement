@@ -1,7 +1,9 @@
 package student.Management;
 
 public class Login {
-	private static final String ID = "원장id";
+	//로그인 관련 필드
+	
+	private static final String ID = "김원장";
 	private static final String PASSWORD = "123456";
 
 	public static String getId() {
