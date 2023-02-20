@@ -1,5 +1,4 @@
 package student.Management;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +104,6 @@ public class ScoreManager {
 	private void print() {
 		System.out.println("반별점수");
 		List<Student> classList;
-
 	}
 
 }

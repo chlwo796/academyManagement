@@ -1,6 +1,4 @@
 package student.Management;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +53,7 @@ public class StudentManager {
 			}
 			case 4: {
 				System.out.println("출결관리 메뉴를 선택했습니다.");
-				// attendanceManage();
+				new AttendanceManage();
 				break;
 			}
 			case 5: {

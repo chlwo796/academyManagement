@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		//메인 화면 및 로그인 메소드
-		
+		Data data = new Data();//Data - studentList의 데이터를 가져오기위해 객체생성
 		Scanner sc = new Scanner(System.in);
 		boolean run = true; // 로그인 성공시 boolean 값변동없이 메인화면ㄱㄱ
 		int count = 0; // 3번틀리면 강종
@@ -17,7 +17,7 @@ public class Main {
 		
 		
 		StudentManager sm = new StudentManager();
-		
+		AttendanceManage am = new AttendanceManage();
 		
 		while (run) {
 
@@ -30,7 +30,12 @@ public class Main {
 				count = 0; // 혹시몰라 초기화함
 				sm.studentRun(); //StudentManager 클래스의 메뉴 선택 메소드 실행!
 				break; // 맞으면 run값 변동없이 while문 실행
-			} else {
+			}
+			else if(data.getStudentList().contains(inputId)){
+				System.out.println(/* xxx + */ "학생이 출석하였습니다");
+				
+			}else {
+			
 				if (count == 2) {
 					run = false;// 3번틀리면 이순간에 바로 종료
 					System.out.println("로그인 실패\n프로그램이 종료됩니다.");

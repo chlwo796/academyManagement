@@ -1,15 +1,11 @@
 package student.Management;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Management {
-	//ArrayList<Lecture> list;
 	Scanner sc;
 
 	Management() {
-	//	list = new ArrayList();
 		sc = new Scanner(System.in);
 	}
 	
@@ -26,23 +22,18 @@ public class Management {
 		find = sc.next();
 
 		for (int i = 0; i < lectureList.size(); i++) { // list 크기만큼 for문 실행
-
 			// 강의 검색
 			if (find.equals(lectureList.get(i).getLecture())) {
-
 				System.out.println("강의 : " + lectureList.get(i).getLecture());
 				System.out.println("선생님 : " + lectureList.get(i).getTeacherName());
 			} else {
 				System.out.println("과목을 다시 확인해주세요.");
-			}
-			break;
+			}break;
 		}
 	}
-
 	
 	// 전체 강의 목록
 	void serchAll() {
-
 		System.out.println("전체 강의 목록");
 		System.out.println("----------------------------------");
 		System.out.println("수업명   담당선생님   수강인원   수강료");
