@@ -1,14 +1,12 @@
 package student.Management;
 
 public class Student {
-	//학생 관련 필드설정 클래스
-	
+	// 학생 관련 필드설정 클래스
+
 	public String studentName; // 학생 이름
 	public String phoneNum; // 전화번호
 	public String className; // 반
 	public String subjectName; // 과목명
-
-	
 	
 	public Student(String studentName, String phoneNum, String className, String subjectName) {
 		// super();
@@ -18,8 +16,6 @@ public class Student {
 		this.subjectName = subjectName;
 	}
 
-	
-	
 	// 게터세터
 	public String getStudentName() {
 		return studentName;

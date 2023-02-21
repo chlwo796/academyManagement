@@ -1,8 +1,10 @@
 package student.Management;
 
 public class Score {
-
+	
 	private int score;
+	
+
 
 	public Score(int score) {
 		super();

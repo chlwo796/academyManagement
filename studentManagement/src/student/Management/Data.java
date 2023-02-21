@@ -9,7 +9,6 @@ public class Data {
 	public List<Student> getStudentList() {
 		//학생 리스트 생성
 		List<Student> studentList = new ArrayList<Student>();
-		
 		//객체 추가
 		studentList.add(new Student("홍길동", "010-1111-1111", "1반", "국어"));
 		studentList.add(new Student("이순신", "010-2222-2222", "2반", "수학"));

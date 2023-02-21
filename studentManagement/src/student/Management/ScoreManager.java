@@ -17,8 +17,7 @@ public class ScoreManager {
 	List<Student> studentList = data.getStudentList();
 	List<Lecture> lectureList = data.getLectureList();
 	List<Score> scoreList = data.getScoreList();
-	Map<Object, Integer> map = new HashMap<Object, Integer>();
-
+	Map<List<Student>, Score> scoreMap; 
 	public ScoreManager() {
 		test();
 		while (run) {
@@ -54,7 +53,17 @@ public class ScoreManager {
 	}
 
 	private void test() {
-
+		// 점수표를 점수로만 하니, 인덱스로 점수만 찾는 시스템을 생각해보니 이상하다..
+		// 점수리스트와 학생리스트를 어떻게 엮어야할까
+		// 선생님별로 관리되는 시스템(과목), 반별로 관리되는 시스템
+		// 선생님 -> 과목 -> 학생이름 -> 점수
+		if(data.getScoreList().isEmpty()) {
+			System.out.print("성적 데이터가 없습니다. 입력하시겠습니까?");
+			System.out.print("관리자 권한이 필요합니다. 비밀번호를 입력해주세요>");
+		}
+		for(int i = 0; i<studentList.size();i++) {
+			// 과목, 이름, 반 -> 점수 리스트 생성(Map)
+		}
 	}
 
 	private void printAll() {
