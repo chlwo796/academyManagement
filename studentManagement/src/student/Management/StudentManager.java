@@ -12,9 +12,6 @@ public class StudentManager {
 	// 메소드 호출
 	List<Student> studentList = data.getStudentList();
 	List<Lecture> lectureList = data.getLectureList();
-	List<Score> scoreList = data.getScoreList();
-	Map<Object, Integer> map = new HashMap<Object, Integer>();
-
 	// 리스트 생성
 	// List<Student> studentArray = new ArrayList<Student>();
 

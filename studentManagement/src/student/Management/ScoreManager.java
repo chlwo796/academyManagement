@@ -1,23 +1,21 @@
 package student.Management;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class ScoreManager {
-	// 성적 검색, 전체 성적, 반별 성적
-	// 검색 -> 이름
-	// 이름 -> 과목 > 점수
-	// Map -> <Student,value = 점수
+
 	Scanner sc = new Scanner(System.in);
 	String choice;
 	boolean run = true;
 	Data data = new Data();
+	List<Lecture> lectureList = data.getLectureList();	// 선생님 이름 꺼내올려고 가져온다.
+	TreeMap<Student, Score> scoreMap = data.getScoreMap();	// 성적표 가져온다.
+	TreeMap<Student, Score> blackList = new TreeMap<Student, Score>(new StudentComporator());	// 상담필요학생 모아놓은맵
+	Set<Student> set = scoreMap.keySet();	// 메소드마다 쓰여서 뺴놨다
 
-	List<Student> studentList = data.getStudentList();
-	List<Lecture> lectureList = data.getLectureList();
-	List<Score> scoreList = data.getScoreList();
-	Map<List<Student>, Score> scoreMap; 
 	public ScoreManager() {
 		test();
 		while (run) {
@@ -53,66 +51,113 @@ public class ScoreManager {
 	}
 
 	private void test() {
-		// 점수표를 점수로만 하니, 인덱스로 점수만 찾는 시스템을 생각해보니 이상하다..
-		// 점수리스트와 학생리스트를 어떻게 엮어야할까
-		// 선생님별로 관리되는 시스템(과목), 반별로 관리되는 시스템
-		// 선생님 -> 과목 -> 학생이름 -> 점수
-		if(data.getScoreList().isEmpty()) {
-			System.out.print("성적 데이터가 없습니다. 입력하시겠습니까?");
-			System.out.print("관리자 권한이 필요합니다. 비밀번호를 입력해주세요>");
-		}
-		for(int i = 0; i<studentList.size();i++) {
-			// 과목, 이름, 반 -> 점수 리스트 생성(Map)
-		}
+
 	}
 
 	private void printAll() {
-		System.out.println("---------------------------------------");
-		System.out.printf("%-8s%-8s%-8s%-8s\n", "수업명", "학생이름", "담당선생님", "성적");
-		System.out.println("---------------------------------------");
-		String teacherName = null;
-		for (int i = 0; i < studentList.size(); i++) {
-			for (int j = 0; j < lectureList.size(); j++) {
-				if (studentList.get(i).getSubjectName().equals(lectureList.get(j).getLecture())) {
-					teacherName = lectureList.get(j).getTeacherName();
+		String teacher = null;	// 반복문 안에서 선생님이름 담아준다.
+		System.out.printf("%-5s%-6s%-7s%-8s%-5s\n", "반명", "수업명", "학생이름", "담당선생님", "성적");
+		if (set.isEmpty()) {
+			System.out.println("성적데이터가 없습니다.");
+			return;
+		}
+		for (Student st : set) {
+			for (int i = 0; i < lectureList.size(); i++) {
+				if (st.getSubjectName().equals(lectureList.get(i).getLecture())) {
+					teacher = lectureList.get(i).getTeacherName();
+				}
+				if (scoreMap.get(st).getScore() < 70) {
+					blackList.put(st, scoreMap.get(st));
+
 				}
 			}
-			if (i < scoreList.size()) {
-				System.out.printf("%-8s%-8s%-8s%-8d\n", studentList.get(i).getSubjectName(),
-						studentList.get(i).getStudentName(), teacherName, scoreList.get(i).getScore());
-			} else
-				System.out.printf("%-8s%-8s%-8s%-8s\n", studentList.get(i).getSubjectName(),
-						studentList.get(i).getStudentName(), teacherName, "성적이없습니다.");
+			System.out.printf("%-6s%-6s%-9s%-7s%-2d\n", st.getClassName(), st.getSubjectName(), st.getStudentName(),
+					teacher, scoreMap.get(st).getScore());
+		}
+
+		if (!blackList.isEmpty()) {
+			System.out.println("-------------------------------------------");
+			System.out.println("상담필요 학생 : (70점미만)");
+			Set<Student> blackSet = blackList.keySet();
+			for (Student st : blackSet) {
+				System.out.printf("%-7s%-15s\n", st.getStudentName(), st.getPhoneNum());
+			}
+			System.out.println("-------------------------------------------");
+		} else {	// 이거는 나중에 없애도될거같다.
+			System.out.println("성적이 대체로 좋습니다.");
 		}
 	}
 
 	private void search() {
-		while (true) {
+		if (set.isEmpty()) {
+			System.out.println("성적데이터가 없습니다.");
+			return;
+		}
+		while (!set.isEmpty()) {
 			int count = 0;
 			System.out.print("학생 이름 입력>");
 			String searchName = sc.nextLine();
 			System.out.println("\n" + searchName + " 학생의 성적");
-			for (int i = 0; i < studentList.size(); i++) {
-				if (searchName.equals(studentList.get(i).getStudentName())) {
-					System.out.println(studentList.get(i).subjectName + ": " + scoreList.get(i).getScore() + " 점");
-					count++;
+			for (Student st : set) {
+				if (st.getStudentName().equals(searchName)) {
+					System.out.println(st.getSubjectName() + ": " + scoreMap.get(st).getScore() + " 점");
 				}
 			}
-			if (count == 0) {
-				System.out.println("성적데이터가 없습니다.");
-			}
+
 			System.out.println("계속 검색하시려면 \"y(Y)\"를 입력하세요.");
 			String choice = sc.nextLine();
-			if (choice.equals("y".toUpperCase())) {
+			if (choice.equalsIgnoreCase("y")) {
 				continue;
 			} else
 				break;
 		}
+
 	}
 
 	private void print() {
+		int sum1 = 0;
+		double average1 = 0;
+		int sum2 = 0;
+		double average2 = 0;
+		double result1 = 0;
+		double result2 = 0;
+		String className = null;	// 반명을 변수에 대입해볼라고 했는데,,일단 보류
+		TreeMap<Student, Score> tempMap1 = new TreeMap<Student, Score>(new StudentComporator());
+		TreeMap<Student, Score> tempMap2 = new TreeMap<Student, Score>(new StudentComporator());
 		System.out.println("반별점수");
-		List<Student> classList;
+		System.out.printf("%-5s%-6s%-7s%-8s\n", "반명", "수강인원", "평균점수", "표준편차");
+		for (Student st : set) {	// 1반, 2반 분리하겠다 -> 아니면 배열을 뽑아서 Math클래스를 써볼까 싶기도 하다..
+			if (st.className.equals("1반")) {
+				tempMap1.put(st, scoreMap.get(st));
+				sum1 += scoreMap.get(st).getScore();
+
+			} else if (st.className.equals("2반")) {
+				tempMap2.put(st, scoreMap.get(st));
+				sum2 += scoreMap.get(st).getScore();
+			}
+		}
+		Set<Student> tempSet1 = tempMap1.keySet();	// 1반 셋(반복문 따로돌리려고..)
+		Set<Student> tempSet2 = tempMap2.keySet();	// 2반 셋
+		average1 = (double) (sum1 / tempMap1.size());
+		average2 = (double) (sum2 / tempMap2.size());
+
+		double disSum1 = 0; // 분산의 합
+		double disSum2 = 0;
+		for (Student st : tempSet1) {
+			disSum1 += Math.pow(tempMap1.get(st).getScore() - average1, 2);	// 1반 분산 합
+		}
+		for (Student st : tempSet2) {
+			disSum2 += Math.pow(tempMap2.get(st).getScore() - average2, 2);	// 2반 분산의 합
+		}
+		result1 = Math.sqrt((double) (disSum1 / tempSet1.size()));	// 분산의 평균의 제곱근(표준편차)
+		result2 = Math.sqrt((double) (disSum2 / tempSet2.size()));	// 근데 소수점이 너무 김
+
+		double sd1 = Math.round(result1 * 100) / 100.0;	//표준편차 소수점 둘째자리까지만 계산(최종변수)
+		double sd2 = Math.round(result2 * 100) / 100.0;
+
+		System.out.printf("%-7s%-6s%-9s%-6s\n", "1반", tempMap1.size() + "명", average1, sd1);
+		System.out.printf("%-7s%-6s%-9s%-6s\n", "2반", tempMap2.size() + "명", average2, sd2);
+		// 반명 입력으로해서 출력해주면 다 계산이 되어야 한다..
 	}
 
 }

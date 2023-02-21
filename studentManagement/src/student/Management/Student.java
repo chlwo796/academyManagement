@@ -7,7 +7,7 @@ public class Student {
 	public String phoneNum; // 전화번호
 	public String className; // 반
 	public String subjectName; // 과목명
-	
+
 	public Student(String studentName, String phoneNum, String className, String subjectName) {
 		// super();
 		this.studentName = studentName;
