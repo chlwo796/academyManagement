@@ -1,10 +1,10 @@
 package student.Management;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class StudentManager {
+	//1번 학생 관리 기능 클래스
 
 	// 객체 생성
 	Data data = new Data();
@@ -12,11 +12,10 @@ public class StudentManager {
 	// 메소드 호출
 	List<Student> studentList = data.getStudentList();
 	List<Lecture> lectureList = data.getLectureList();
-	// 리스트 생성
-	// List<Student> studentArray = new ArrayList<Student>();
+	
 
 	Scanner sc = new Scanner(System.in);
-	int menuSelect = 0;
+	int menuSelect = 0; //메뉴입력키
 	boolean flag = true;
 	String searchName;
 
@@ -66,6 +65,7 @@ public class StudentManager {
 		}
 	} // studentRun end
 
+	
 	// 학생관리 메뉴의 메소드
 	void studentManage() {
 		Boolean flag = true;
@@ -82,7 +82,8 @@ public class StudentManager {
 			boolean run = true;
 			String input; // 추가검색용 변수
 			boolean isThere; // 등록되지 않은 학생 검사용
-
+			
+			//학생 관리 메뉴의 상세 기능
 			while (run) {
 
 				switch (menuSelect) {
@@ -90,6 +91,7 @@ public class StudentManager {
 					isThere = false;
 					System.out.print("학생 이름을 입력해주세요. > ");
 					searchName = sc.nextLine();
+					System.out.println();
 
 					// searchName이 리스트에 있다면 정보 출력
 					for (int i = 0; i < studentList.size(); i++) {
@@ -99,6 +101,7 @@ public class StudentManager {
 							System.out.println("전화번호: " + studentList.get(i).getPhoneNum());
 							System.out.println("수강과목: " + studentList.get(i).getSubjectName());
 							System.out.println("반: " + studentList.get(i).getClassName());
+							System.out.println();
 							isThere = true;
 
 						}
@@ -110,7 +113,7 @@ public class StudentManager {
 						break;
 					}
 
-					System.out.println("추가 검색 하시겠습니까? (Y/N)");
+					System.out.print("추가 검색 하시겠습니까? (Y/N) > ");
 					input = (sc.nextLine()).toUpperCase();
 					if (input.equals("Y")) {
 						run = true;
@@ -133,9 +136,10 @@ public class StudentManager {
 					String inputSub = sc.nextLine();
 					System.out.print("등록할 반 > ");
 					String inputClass = sc.nextLine();
-
+					
 					studentList.add(new Student(inputName, inputPhone, inputClass, inputSub));
-
+					
+					System.out.println();
 					System.out.println("학생 정보가 등록되었습니다.");
 					run = false;
 					break;
@@ -155,6 +159,7 @@ public class StudentManager {
 						if (searchName.equals(studentList.get(i).getStudentName())) {
 							System.out.print("변경할 전화번호를 입력하세요. > ");
 							studentList.get(i).setPhoneNum(ms.nextLine());
+							System.out.println();
 							System.out.println(
 									"전화번호가 " + privNum + "에서 " + studentList.get(i).getPhoneNum() + "으로 변경되었습니다.");
 							isThere = true;
@@ -166,7 +171,7 @@ public class StudentManager {
 						break;
 					}
 
-					System.out.println("더 수정 하시겠습니까? (Y/N)");
+					System.out.print("더 수정 하시겠습니까? (Y/N) > ");
 					input = (sc.nextLine()).toUpperCase();
 					if (input.equals("Y")) {
 						run = true;
@@ -187,7 +192,7 @@ public class StudentManager {
 
 						if (studentList.get(i).studentName.equals(delStudent)) {
 
-							System.out.println("정말 삭제하시겠습니까? (Y/N)");
+							System.out.print("정말 삭제하시겠습니까? (Y/N) > ");
 							input = (sc.nextLine()).toUpperCase();
 
 							if (input.equals("Y")) {
@@ -221,6 +226,7 @@ public class StudentManager {
 
 				default:
 					System.out.println("잘못된 입력입니다.");
+					run = false;
 					break;
 				} // switch 끝
 			}
