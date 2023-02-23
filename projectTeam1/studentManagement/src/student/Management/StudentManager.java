@@ -40,7 +40,7 @@ public class StudentManager {
 			}
 			case 2: {
 				System.out.println("강의관리 메뉴를 선택했습니다.");
-				// classManage();
+				LectureManagement.main(null);
 				break;
 			}
 			case 3: {
