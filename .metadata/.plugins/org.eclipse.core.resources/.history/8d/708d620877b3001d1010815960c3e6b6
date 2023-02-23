@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class LectureManagement {
+public class Management {
 
 	Scanner sc;
 
-	LectureManagement() {
+	Management() {
 		sc = new Scanner(System.in);
 	}
 
