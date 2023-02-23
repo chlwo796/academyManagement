@@ -9,6 +9,7 @@ public class LectureManagement {
 		boolean flage = true;
 		Scanner sc = new Scanner(System.in);
 		while (flage) {
+			System.out.println(" ");
 			System.out.println("-----------------------------------------------------------");
 			System.out.println("1.강의 검색 | 2.전체 강의 목록 | 3.선생님 검색 | 4. 이전화면으로");
 			System.out.println("-----------------------------------------------------------");
@@ -25,7 +26,7 @@ public class LectureManagement {
 				cont.serchAll();
 				break;
 			case "3":
-				cont.serch();
+				cont.thserch();
 				break;
 			case "4":
 				System.out.println("이전화면으로");
