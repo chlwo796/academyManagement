@@ -50,7 +50,7 @@ public class StudentManager {
 			}
 			case 4: {
 				System.out.println("출결관리 메뉴를 선택했습니다.");
-//				new AttendanceManage();
+				new Attendance();
 				break;
 			}
 			case 5: {

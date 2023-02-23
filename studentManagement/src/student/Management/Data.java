@@ -56,4 +56,21 @@ public class Data {
 		return scoreMap; // 리스트의 주소를 리턴
 
 	}
+
+	public TreeMap<Student, AttendanceData> getAttendanceMap() {
+		TreeMap<Student, AttendanceData> attendanceMap = new TreeMap<Student, AttendanceData>(new StudentComporator());
+		// 객체 추가
+		attendanceMap.put(new Student("홍길동", "010-1111-1111", "1반", "국어"), new AttendanceData(0));
+		attendanceMap.put(new Student("이순신", "010-2222-2222", "2반", "수학"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순1", "010-3333-3333", "1반", "영어"), new AttendanceData(0));
+		attendanceMap.put(new Student("유관순2", "010-4444-4444", "2반", "수학"), new AttendanceData(0));
+		attendanceMap.put(new Student("유관순3", "010-1111-1111", "1반", "국어"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순4", "010-5555-5555", "1반", "영어"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순5", "010-6666-6666", "2반", "국어"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순6", "010-7777-7777", "1반", "수학"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순7", "010-8888-8888", "1반", "수학"), new AttendanceData(1));
+		attendanceMap.put(new Student("유관순8", "010-0000-0000", "1반", "수학"), new AttendanceData(1));
+
+		return attendanceMap; // 리스트의 주소를 리턴
+	}
 }
