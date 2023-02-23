@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentManager {
-	//1번 학생 관리 기능 클래스
+	// 1번 학생 관리 기능 클래스
 
 	// 객체 생성
 	Data data = new Data();
@@ -12,10 +12,9 @@ public class StudentManager {
 	// 메소드 호출
 	List<Student> studentList = data.getStudentList();
 	List<Lecture> lectureList = data.getLectureList();
-	
 
 	Scanner sc = new Scanner(System.in);
-	int menuSelect = 0; //메뉴입력키
+	int menuSelect = 0; // 메뉴입력키
 	boolean flag = true;
 	String searchName;
 
@@ -39,7 +38,7 @@ public class StudentManager {
 			}
 			case 2: {
 				System.out.println("강의관리 메뉴를 선택했습니다.");
-				LectureManagement.main(null);
+				LectureMenu.main(null);
 				break;
 			}
 			case 3: {
@@ -65,7 +64,6 @@ public class StudentManager {
 		}
 	} // studentRun end
 
-	
 	// 학생관리 메뉴의 메소드
 	void studentManage() {
 		Boolean flag = true;
@@ -82,8 +80,8 @@ public class StudentManager {
 			boolean run = true;
 			String input; // 추가검색용 변수
 			boolean isThere; // 등록되지 않은 학생 검사용
-			
-			//학생 관리 메뉴의 상세 기능
+
+			// 학생 관리 메뉴의 상세 기능
 			while (run) {
 
 				switch (menuSelect) {
@@ -127,7 +125,7 @@ public class StudentManager {
 					break;
 
 				case 2: // 학생 등록
-					
+
 					System.out.print("등록할 학생 이름 > ");
 					String inputName = sc.nextLine();
 					System.out.print("전화번호 등록 > ");
@@ -136,9 +134,9 @@ public class StudentManager {
 					String inputSub = sc.nextLine();
 					System.out.print("등록할 반 > ");
 					String inputClass = sc.nextLine();
-					
+
 					studentList.add(new Student(inputName, inputPhone, inputClass, inputSub));
-					
+
 					System.out.println();
 					System.out.println("학생 정보가 등록되었습니다.");
 					run = false;
@@ -148,7 +146,7 @@ public class StudentManager {
 
 					Scanner ms = new Scanner(System.in); // 변경할 전화번호를 입력받을 스캐너
 					isThere = false;
-					
+
 					System.out.print("학생 이름을 입력하세요. > ");
 					searchName = sc.nextLine();
 
@@ -187,7 +185,7 @@ public class StudentManager {
 					System.out.print("삭제할 학생의 이름을 입력해주세요. > ");
 					String delStudent = sc.nextLine();
 					isThere = false;
-					
+
 					for (int i = 0; i < studentList.size(); i++) {
 
 						if (studentList.get(i).studentName.equals(delStudent)) {
@@ -196,7 +194,7 @@ public class StudentManager {
 							input = (sc.nextLine()).toUpperCase();
 
 							if (input.equals("Y")) {
-								studentList.remove(i); //학생 삭제
+								studentList.remove(i); // 학생 삭제
 								System.out.println(delStudent + " 학생의 정보가 삭제되었습니다.");
 								isThere = true;
 								run = false;
@@ -221,6 +219,7 @@ public class StudentManager {
 
 				case 5: // 이전 화면으로
 					System.out.println("이전 화면으로 돌아갑니다.");
+					flag = false;	// 이전화면으로 안가서 flag도 false로 바꿨습니당
 					run = false;
 					break;
 
@@ -232,6 +231,5 @@ public class StudentManager {
 			}
 		}
 	}// studentManage() end
-
 
 }

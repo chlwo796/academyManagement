@@ -156,8 +156,10 @@ public class ScoreManager {
 		// 포맷형식에서 소수점 두번째자리까지 출력하라고 추가해서 따로 Math클래스 쓰던 변수는 삭제하였습니다.
 		// (%-7s)첫번째 오는 문자열에 왼쪽기준 7칸
 		// 주고,(%d명)두번째정수옆에"명",(\s=공백),(%.2f점)소수점두번째자리실수
-		System.out.printf("%-7s%d명\s\s\s%.2f점\s\s\s%.2f\n", "1반", tempMap1.size(), average1, sd1);
-		System.out.printf("%-7s%d명\s\s\s%.2f점\s\s\s%.2f\n", "2반", tempMap2.size(), average2, sd2);
+//		System.out.printf("%-7s%d명\s\s\s%.2f점\s\s\s%.2f\n", "1반", tempMap1.size(), average1, sd1);
+		System.out.println("1반     " + tempMap1.size() + "명    " + Math.round(average1*100.0)/100.0 + "점  " + Math.round(sd1*100.0)/100.0);
+//		System.out.printf("%-7s%d명\s\s\s%.2f점\s\s\s%.2f\n", "2반", tempMap2.size(), average2, sd2);
+		System.out.println("2반     " + tempMap2.size() + "명    " + Math.round(average2*100.0)/100.0 + "점  " + Math.round(sd2*100.0)/100.0);
 	}
 
 }
