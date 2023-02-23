@@ -25,6 +25,10 @@ public class Main {
 			System.out.println("학생이 로그인을 합니다"); 
 			atdm.studentArrive();
 		}break;
+		default: {
+			System.out.println("잘못된 입력입니다.");
+			System.out.println("프로그램을 종료합니다.");
+			}break;
 		}
 		
 	}

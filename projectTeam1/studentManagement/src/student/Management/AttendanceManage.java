@@ -1,8 +1,10 @@
 package student.Management;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class AttendanceManage {
@@ -28,53 +30,42 @@ public class AttendanceManage {
 		String id = sc.next();
 		boolean flag = true;
 		while (flag) {
+			List<AttendanceManage> list = new ArrayList<AttendanceManage>();
+			String sNum;
+			String sName;
 			for (int i = 0; i < data.getStudentList().size(); i++) {
-				String pNum = data.getStudentList().get(i).phoneNum; // i인덱스의 전화번호를 받음
-				String sName = data.getStudentList().get(i).studentName;// i인덱스의 학생이름을 받음
-				if (id.contains(pNum)) {
-					System.out.println(sName + " 님이 도착하였습니다");
-					System.out.print("출석 하시겠습니까? > (y/n) ");
-					String answer = sc.next();
+				sNum = data.getStudentList().get(i).getPhoneNum();// .get(i).getPhoneNum(); // studentList - i인덱스의 전화번호를 받음
+				sName = data.getStudentList().get(i).getStudentName();// studentList - i인덱스의 학생이름을 받음			
+			
+				if(id.equals(sNum)) { // sNum이 입력한 id와 같다면
+					System.out.println(sName + " 님, 출석 하시겠습니까? > (y/n) ");
+					System.out.println("'n'을 입력하면 프로그램이 종료됩니다");
+					String answer = sc.next(); //대답 입력
 					if (answer.equals("y")) {
 						attendingCheck();// 출석 체크 메소드 연결
-						break;
-					} else if (answer.equals("n")) {
-						System.out.println("종료합니다");
-						break;
+						flag = false;	
+					}else if (answer.equals("n")) {
+						System.out.println("프로그램을 종료합니다");
+						flag = false;	
+					}else { // y or n가 아닌 다른것 입력됐을 때
+						System.out.println("잘못 입력하였습니다");
+						System.out.println("다시 입력하여주십시오");		
 					}
-				} else {
-					System.out.println("등록되지 않은 학생의 번호입니다");
-					System.out.println("다시 입력하시겠습니까? > (y/n)");
-					String answer = sc.next();
-					if (answer.equals("y")) {
-						return;
-					} else
-						break;
 				}
 			}
-			break;
 		}
 	}
-
-//			if(id.) {
-//					System.out.println("등록되지 않은 학생의 번호입니다");
-//					System.out.println("다시 입력하시겠습니까? > (y/n)");
-//					String answer = sc.next();
-//				if(answer.equals("y")) {
-//						break;
-//					}else if(answer.equals("n")) {
-//						System.out.println("종료합니다");
-//					}
-//				}
-//			}
-//		System.out.println("잘못 입력하였습니다");
-//		System.out.println("다시 입력하시겠습니까? > (y/n)");
-//		String answer = sc.next();
-//		if(answer.equals("y")) {
-//				continue;
-//		}else if(answer.equals("n")) {
-//			break;
-//			}
+		/*	if(!id.equals(sNum)) { // sNum이 입력한 id와 다르다면
+				System.out.println("등록되지 않은 학생의 번호입니다");
+				System.out.println("다시 입력하시겠습니까? > (y/n)");
+				String answer = sc.next();
+				if(answer.equals("n")) {
+					System.out.println("프로그램을 종료합니다");
+					flag = false;
+				}else if(answer.equals("y")) {
+							
+				}
+			}*/
 
 	public void attendingCheck() {// 출석 체크 메소드
 //		Calendar now = Calendar.getInstance();
@@ -94,8 +85,12 @@ public class AttendanceManage {
 			System.out.println("출석체크 완료");
 			System.out.println("현재 시각 : " + str);
 			System.out.println("정상 출석 입니다.");
+		} else if (0 <= date.getHours() && date.getHours() < 8){
+		 	System.out.println("너무 일찍 오셨습니다");
+			System.out.println("오픈시간 이후에 등원 부탁드립니다.");
 		} else {
-			System.out.println("출석 가능한 시간이 아닙니다");
+			System.out.println("출석 가능한 시간이 지났습니다.");
+			System.out.println("내일 다시 등원해주십시오.");
 		}
 
 	}
