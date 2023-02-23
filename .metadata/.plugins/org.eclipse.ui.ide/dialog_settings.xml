@@ -14,7 +14,12 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+<<<<<<< HEAD
 			<item value="C:\JE\project"/>
+=======
+			<item value="C:\JHC\web_studyB\project_file\projectTeam1\projectTeam1"/>
+			<item value="C:\JHC\web_studyB\project_file\projectTeam1"/>
+>>>>>>> 497e0a3b80ca6184a4a228336d6cdd8fb7651e58
 		</list>
 	</section>
 </section>
