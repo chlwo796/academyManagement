@@ -21,10 +21,11 @@ public class LectureManagement {
 		// 강의 검색
 		void serch() {
 
-			String find; // 강의 이름 받는 곳
+			String find; // 강의 과목 받는 곳
 
 			System.out.print("검색할 강의 과목을 입력하세요 : ");
-			find = sc.next();
+			find = sc.next(); // 강의 과목 입력
+			String num = null;
 
 			for (int i = 0; i < lectureList.size(); i++) { // list 크기만큼 for문 실행
 
@@ -36,8 +37,8 @@ public class LectureManagement {
 					System.out.println("선생님 : " + lectureList.get(i).getTeacherName());
 					System.out.println("강의료 : " + lectureList.get(i).getTuition());
 					System.out.print("수강 학생 수를 구하기 위해서 1.(국어) 2.(수학) 3.(영어) 1~3 숫자를 입력하세요. : ");
-					String num = null;
-					num = sc.nextLine();
+					
+					num = sc.nextLine(); // 1~3 숫자 입력
 					studentsEnrolled(); // 수강 학생 수 구하는 메소드 호출
 					System.out.println("=================================");
 					break;
@@ -62,6 +63,7 @@ public class LectureManagement {
 		void thserch() {
 
 			String find; // 선생님 이름 받는 곳
+			String num = null;
 
 			System.out.print("검색할 선생님을 입력하세요 : ");
 			find = sc.next();
@@ -74,8 +76,7 @@ public class LectureManagement {
 				}  else { System.out.println("검색에 실패했습니다."); }
 			}
 			System.out.print("수강 학생 수를 구하기 위해서 1.(국어) 2.(수학) 3.(영어) 1~3 숫자를 입력하세요. : ");
-			String num = null;
-			num = sc.nextLine();
+			num = sc.nextLine(); // 1~3 숫자 입력
 			studentsEnrolled(); // 수강 학생 수 구하는 메소드 호출
 			System.out.print("담당 학생 이름을 구하기 위해서 1.(국어) 2.(수학) 3.(영어) 1~3 숫자를 입력하세요. : ");
 			studentsEnrolled2(); // 수강 학생 이름 구하는 메소드 호출
